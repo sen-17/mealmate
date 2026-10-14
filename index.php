@@ -8,7 +8,7 @@ switch ($page) {
         } else {
             require_once './views/layouts/header.php';
             echo "<main class='container my-5 text-center'>
-                    <h2 class='text-muted'9>Selamat Datang di MealMate</h2>
+                    <h2 class='text-muted'>Selamat Datang di MealMate</h2>
                     <p class='text-muted'>Router aktif. Buat file <code>controllers/home.php</code> untuk mengontrol halaman ini.</p>
                   </main>";
             require_once './views/layouts/footer.php';

@@ -1,78 +1,19 @@
 * {
-    color:white;
-    font-family: 'Poppins', sans-serif
+    font-family: 'Poppins', sans-serif;
 }
 
 html, body {
     height: 100%;
 }
 
-main {
-    flex : 1;
-}
-
 body {
     font-family: 'Poppins', sans-serif;
-    font-size:14px;
+    font-size: 14px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-footer{
-    background-color: #0B3D2E;
-    padding-top:16px;
-    padding-bottom: 16px;
-}
-
-.footer-logo{
-    width: 90px;
-    height: 90px;
-    object-fit:contain;
-}
-
-.menu-footer-container {
-    display: flex;
-    gap: 48px;
-}
-
-.footer-container{
-    border-bottom: 1px solid white;
-    padding-bottom: 30px;  
-    margin-bottom: 20px;
-}
-
-.social-icons {
-    display: flex;
-    gap: 16px;
-    font-size: 24px;
-}
-
-.copyright-slogan {
-    font-family: "Kaushan Script", cursive;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-}
-
-h5 {
-    font-size: 15px !important;
-    font-weight: bold !important;
-    letter-spacing: 0.5px; 
-}
-
-p {
-    margin: 0 !important;
-}
-
-@media (max-width: 767.98px) {
-    .menu-footer-container {
-        display: grid;
-        grid-template-columns: auto auto;
-        justify-content: center;
-        column-gap: clamp(28px, 8vw, 48px);
-        row-gap: 24px;
-        width: 100%;
-        text-align: left;
-    }
+main {
+    flex: 1;
 }
