@@ -31,3 +31,5 @@ config/credentials.*
 
 Thumbs.db
 desktop.ini
+
+fiveserver.config.js

@@ -1,0 +1,154 @@
+.logo h2 {
+    font-family: 'Kaushan Script', cursive;
+    align-self: self-end;
+}
+
+.active {
+    color: #1F4B3A;
+}
+
+.active::after {
+    width: 100%;
+}
+
+.nav-link a::after {
+    content: "";
+    position: absolute;
+    height: 2.4px;
+    background-color: #E8A13A;
+    left: 0;
+    bottom: 0;
+}
+
+.nav-link a {
+    position: relative;
+    overflow: hidden;
+}
+
+.non-active {
+    color: #000;
+}
+
+.non-active::after {
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+@keyframes hovernavbar {
+    0%, 100% {
+        width: 100%;
+    }
+}
+
+.login-nav {
+    color: #000;
+    font-size: 14px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    padding: 8px 15px;
+}
+
+.order-nav {
+    color: white;
+    background-color: #E07A3F;
+    padding: 8px 15px;
+    border-radius: 12px;
+}
+
+/* Login button border untuk di hover */
+.login-nav::before,
+.login-nav::after {
+    content: "";
+    position: absolute;
+    border: 0px solid transparent;
+    width: 0%;
+    height: 0%;
+    bottom: 0%;
+    right: 0%;
+}
+
+.login-nav::before {
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}
+
+.login-nav::after {
+    border-top-width: 2px;
+    border-right-width: 2px;
+}
+
+/* ===== HOVER biar aktif cuman di pc aja ===== */
+@media (hover: hover) and (pointer: fine) {
+    .active:hover {
+        color: #1F4B3A;
+    }
+
+    .non-active:hover {
+        color: #1F4B3A;
+    }
+
+    .non-active:hover::after {
+        width: 100%;
+        animation: hovernavbar 1.5s ease-in-out 0.3s infinite;
+    }
+
+    .login-nav:hover {
+        color: #1F4B3A;
+    }
+
+    .login-nav:hover::before,
+    .login-nav:hover::after {
+        border-color: #E07A3F;
+        transition: border-color 0s, width 0.3s, height 0.3s;
+        width: 100%;
+        height: 100%;
+    }
+
+    .login-nav:hover::before {
+        transition-delay: 0s, 0s, 0.3s;
+    }
+
+    .login-nav:hover::after {
+        transition-delay: 0s, 0.3s, 0s;
+    }
+}
+
+/* ===== Mobile and Tablet (offcanvas) ===== */
+@media (max-width: 991.98px) {
+    #navMenu {
+        --bs-offcanvas-width: 75vw;
+        max-width: 400px;
+        background-color: #fff;
+        height: 100dvh;
+    }
+
+    #navMenu .offcanvas-body {
+        padding: 0.5rem 1.5rem 2rem;
+        justify-content: space-between;
+        overflow-y: auto;
+    }
+
+    /*  */
+    .active::after {
+        width: 0;
+    }
+
+    /* tombol Masuk */
+    #navMenu .login-nav {
+        width: 100%;
+        display: block;
+        text-align: center;
+        padding: 0.75rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+    }
+
+    /* tombol Mulai Pesan */
+    #navMenu .order-nav {
+        display: none;
+        width: 100%;
+        padding: 0.75rem;
+        text-align: center;
+    }
+}
