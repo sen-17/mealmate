@@ -1,12 +1,16 @@
 #hero-menu-section {
-    padding: 60px 0;
-    min-height: 280px;
+    padding: 80px 0;
+    min-height: 380px;
     display: flex;
     align-items: center;
     background-image: url('../img/home-hero.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.hero-content {
+    max-width: 60%;
 }
 
 .home-cto-btn,
@@ -40,13 +44,13 @@
 
 .home-hero-slogan {
     color: #13523C;
-    font-size: 14px;
+    font-size: clamp(12px, 1vw, 14px);
     letter-spacing: 0.5px;
     margin-bottom: 8px;
 }
 
 #home-slogan-1 {
-    font-size: 40px;
+    font-size: clamp(28px, 3vw, 44px);
     color: #3B190F;
     line-height: 1.25;
 }
@@ -56,7 +60,7 @@
 }
 
 #home-slogan-description {
-    font-size: 14px;
+    font-size: clamp(13.5px, 1vw, 15px);
     font-weight: 600;
     color: #2b2b2b;
     line-height: 1.6;
@@ -64,13 +68,14 @@
 }
 
 .icon-logo {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: #E4EEDD;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .steps-seq {
@@ -90,19 +95,25 @@
 .steps-no-logo {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+}
+
+.steps-wrapper {
+    border-radius: 20px;
+    padding: 36px 28px;
 }
 
 .steps-title {
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .steps-title h4 {
     color: #3A1A0E;
     font-weight: 700;
-    font-size: 20px;
+    font-size: clamp(18px, 1.5vw, 22px);
     line-height: 1.35;
     margin-bottom: 8px;
 }  
@@ -123,7 +134,7 @@
 .info-card h4 {
     color: #13523C;
     font-weight: 600;
-    font-size: 18px;
+    font-size: clamp(16px, 1.25vw, 18px);
     margin-bottom: 8px;
 }
 
@@ -134,39 +145,44 @@
     margin: 0;
 }
 
-#home-order-steps .info-card {
-    padding-left: 1.5rem; 
-    border-right: none;
-}
-
 .feature-wrapper {
-    padding:12px;
+    padding: 8px 0;
 }
 
-.banner-slogan{
+.banner-content {
+    max-width: 65%;
+}
+
+.banner-slogan {
     display: flex;
     align-items: center;
-    color:white
+    justify-content: center;
+    flex: 1;
+    color: white;
 }
 
 .banner-slogan h3 {
     font-family: 'Caveat', sans-serif;
     transform: rotate(-6deg);
     transform-origin: left center;
-    font-size: 2.25rem;
+    font-size: clamp(1.85rem, 2.3vw, 2.4rem);
     font-weight: 700;
+    margin: 0;
 }
 
-.banner-cto{
-    max-width: 400px;
+.banner-cto {
+    flex: 1.2;
+    max-width: 420px;
 }
 
 .banner-cto p {
     font-family: 'Quicksand', sans-serif;
     color: white;
+    font-size: clamp(13.5px, 1vw, 15px);
+    line-height: 1.5;
 }
 
-.home-banner-container{
+.home-banner-container {
     background-image: url('../img/home-banner.webp');
     background-size: cover;
     background-position: center;
@@ -184,24 +200,25 @@
 
 .home-package-title-wrapper > p:last-child {
     color: #61625F;
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 1.1vw, 1.1rem);
     margin-top: 0.5rem;
 }
 
 .package-title {
-    gap: 1.5rem;          
+    gap: clamp(0.6rem, 1.5vw, 1.5rem);          
 }
 
 .package-title h4 {
     color: #461F0C;       
     font-weight: 700;
-    font-size: 2.25rem;
+    font-size: clamp(1.4rem, 2.4vw, 2.25rem);
     margin: 0;
 }
 
 .package-title img {
-    width: 40px;
+    width: clamp(26px, 3vw, 40px);
     height: auto;
+    flex-shrink: 0;
 }
 
 .package-title img:first-child {
@@ -212,10 +229,14 @@
     transform: rotate(295deg);
 }
 
+.package-list-row {
+    max-width: 1180px;
+}
+
 .package-card {
     background: #fff;
     border-radius: 16px;
-    padding: 8px 8px 24px;
+    padding: 8px 8px 20px;
     height: 100%; 
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     display: flex;
@@ -224,8 +245,8 @@
 
 .package-card .img-placeholder {
     width: 100%;
-    height: 240px;
-    border-radius: 14px;
+    height: 190px;
+    border-radius: 12px;
     overflow: hidden;
     background-color: #e9e2d6;
 }
@@ -238,7 +259,7 @@
 }
 
 .package-info {
-    padding: 20px 14px 0;
+    padding: 16px 12px 0;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -250,56 +271,56 @@
 }
 
 .package-info > p:first-child {
-    font-size: 1.25rem;
+    font-size: clamp(1.05rem, 1.2vw, 1.2rem);
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
 }
 
 .package-duration-slot {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.35rem;
 }
 
 .package-duration-slot p {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
 }
 
 .package-info > p:nth-of-type(2) {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    margin-bottom: 1.25rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    margin-bottom: 1.1rem;
 }
 
 .package-price {
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1.15rem; 
 }
 
 .package-price p:first-child {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     margin-bottom: 0.1rem;
 }
 
 .package-price p:last-child {
     color: #E8972F;            
-    font-size: 1.65rem;
+    font-size: clamp(1.25rem, 1.5vw, 1.5rem);
     font-weight: 700;
     line-height: 1.2;
 }
 
 .package-price p:last-child span {
     color: #000;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 400;
 }
 
 .package-info .btn {
     display: block;
     width: 100%;
-    max-width: 185px;
-    padding: 0.75rem 0;
+    max-width: 175px;
+    padding: 0.6rem 0;
     background-color: #1F5A3F;      
     color: #fff;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.925rem;
     border: none;
     border-radius: 12px;
     transition: background-color 0.2s ease;
@@ -319,7 +340,7 @@
 
 .home-reviews-wrapper > p {
     color: #61625F;
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 1.1vw, 1.1rem);
     margin-top: 0.5rem;
 }
 
@@ -327,12 +348,12 @@
     background-color: #FBFAF5;        
     border: 1px solid #F1EADB;
     border-radius: 20px;
-    padding: 20px 18px;
+    padding: 18px 16px;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;  
-    gap: 1.25rem;
+    gap: 1.15rem;
 }
 
 .review {
@@ -340,7 +361,7 @@
 }
 
 .review img {
-    width: 28px;
+    width: 24px;
     height: auto;
     flex-shrink: 0;
     margin-top: 4px;
@@ -349,15 +370,15 @@
 .review p {
     margin: 0;
     color: #6B6B6B;
-    font-size: 1rem;
+    font-size: 0.925rem;
     line-height: 1.5;
     min-width: 0;             
     overflow-wrap: anywhere;
 }
 
 .profile-img {
-    width: 64px;
-    height: 64px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: #D9D9D9;      
     flex-shrink: 0;
@@ -365,7 +386,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 17px;
+    font-weight: 600;
 }
 
 .profile-img img {
@@ -382,20 +404,21 @@
 .profile-detail h3 {
     margin: 0;
     color: #13523C;                  
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 1.05vw, 1.05rem);
     font-weight: 700;
+    line-height: 1.3;
 }
 
 .profile-detail p {
     margin: 0;
     color: #000;
-    font-size: 1rem;
+    font-size: 0.875rem;
 }
 
 .review-wrapper .rating {
     color: #F0B866;                   
-    font-size: 1.3rem;
-    margin-top: 2px;
+    font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+    margin-top: 3px;
     flex-wrap: nowrap; 
 }
 
@@ -403,75 +426,107 @@
     color: #D9D9D9;                   
 }
 
-@media (min-width: 992px) {
-    #home-information .info-card-col:not(:last-child) .info-card {
-        border-right: 1px solid #E2E3DA;
-        padding-right: 2rem;
+@media (min-width: 1400px) {
+    main .container {
+        max-width: 1400px;
     }
 
+    #hero-menu-section {
+        min-height: 430px;
+        padding: 95px 0;
+    }
+}
+
+@media (min-width: 1200px) {
     #home-order-steps .steps-title {
         border-right: 1px solid #E2E3DA;
-        padding-right: 2rem;
+        padding-right: 1.75rem;
     }
 
     #home-order-steps .info-card {
         border-right: none !important;
-        padding-left: 1.5rem;
+        padding-left: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+    #home-information .info-card-col:not(:last-child) .info-card {
+        border-right: 1px solid #E2E3DA;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    #home-order-steps .steps-title {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #E2E3DA;
+        padding-bottom: 1.25rem;
+    }
+
+    #home-order-steps .info-card-col:not(:last-child) .info-card {
+        border-right: 1px solid #E2E3DA;
+        padding-right: 1.25rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    #hero-menu-section {
+        background-image: 
+            linear-gradient(90deg, rgba(252, 249, 242, 0.92) 0%, rgba(252, 249, 242, 0.78) 65%, rgba(252, 249, 242, 0.45) 100%),
+            url('../img/home-hero.webp');
+        padding: 60px 0;
+        min-height: 320px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .banner-content {
+        max-width: 100%;
+    }
+
+    .home-banner-container {
+        background-image:
+            linear-gradient(rgba(19, 82, 60, 0.85), rgba(19, 82, 60, 0.85)),
+            url('../img/home-banner.webp');
+    }
+
+    .banner-slogan {
+        justify-content: flex-start;
     }
 }
 
 @media (min-width: 576px) and (max-width: 991.98px) {
     #home-information .info-card-col:nth-child(odd) .info-card {
         border-right: 1px solid #E2E3DA;
-        padding-right: 1.5rem;
+        padding-right: 1.25rem;
     }
 
     #home-order-steps .steps-title {
         border-right: none;
         padding-right: 0;
         border-bottom: 1px solid #E2E3DA;
-        padding-bottom: 1.5rem;
+        padding-bottom: 1.25rem;
     }
 
-    #home-order-steps .info-card {
-        border-right: none !important;
-        padding-left: 1.25rem;
+    #home-order-steps .info-card-col:nth-child(even) .info-card {
+        border-right: 1px solid #E2E3DA;
+        padding-right: 1.25rem;
     }
 }
 
-@media (max-width: 575.98px) {
-    #home-information .info-card-col:not(:last-child) .info-card {
-        border-right: none;
-        padding-right: 0;
-        border-bottom: 1px solid #E2E3DA;
-        padding-bottom: 1.5rem;
-    }
-
-    #home-information .info-card-col:last-child .info-card {
-        border-right: none;
-        padding-right: 0;
-        border-bottom: none;
-        padding-bottom: 0;
-    }
-
-    #home-order-steps .steps-title {
-        border-right: none;
-        padding-right: 0;
-        border-bottom: 1px solid #E2E3DA;
-        padding-bottom: 1.5rem;
-    }
-
-    #home-order-steps .info-card {
-        border-right: none !important;
-        padding-right: 0;
-        padding-left: 1.25rem;
+@media (max-width: 768px) {
+    .feature-wrapper{
+        padding-left: 12px;
     }
 }
 
 @media (max-width: 575.98px) {
     #hero-menu-section {
         background-image: 
-            linear-gradient(rgba(252, 249, 242, 0.88), rgba(252, 249, 242, 0.88)),
+            linear-gradient(rgba(252, 249, 242, 0.9), rgba(252, 249, 242, 0.9)),
             url('../img/home-hero.webp');
         padding: 40px 0;
         min-height: auto;
@@ -486,7 +541,69 @@
         font-size: 13.5px;
     }
 
-    .home-cto-btn {
+    .home-cto-btn,
+    .banner-cto-btn {
         width: 100%;
+    }
+
+    .steps-wrapper {
+        padding: 24px 18px;
+    }
+
+    #home-information .info-card-col:not(:last-child) .info-card {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #E2E3DA;
+        padding-bottom: 1.25rem;
+    }
+
+    #home-information .info-card-col:last-child .info-card {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    #home-order-steps .steps-title {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #E2E3DA;
+        padding-bottom: 1.25rem;
+    }
+
+    #home-order-steps .info-card-col:not(:last-child) .info-card {
+        border-right: none !important;
+        padding-right: 0;
+        padding-left: 0;
+        border-bottom: 1px solid #E2E3DA;
+        padding-bottom: 1.25rem;
+    }
+
+    #home-order-steps .info-card-col:last-child .info-card {
+        border-right: none !important;
+        padding-right: 0;
+        padding-left: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .package-card {
+        max-width: 340px;
+        margin: 0 auto;
+    }
+
+    .package-card .img-placeholder {
+        height: 175px;
+    }
+
+    .review-wrapper {
+        padding: 16px;
+        gap: 1rem;
+    }
+
+    .profile-img {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
     }
 }

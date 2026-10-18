@@ -1,28 +1,30 @@
 <main>
     <section id="hero-menu-section" class="d-flex align-items-center">
         <div class="container" id="home-container">
-            <p class="home-hero-slogan">KATERING HARIAN HIDUP LEBIH MUDAH</p>
+            <div class="hero-content">
+                <p class="home-hero-slogan">KATERING HARIAN HIDUP LEBIH MUDAH</p>
 
-            <h1 id="home-slogan-1">
-                Makan Enak, <br class="d-none d-md-inline">
-                <span id="home-slogan-2">Aktivitas Makin Lancar</span>
-            </h1>
+                <h1 id="home-slogan-1">
+                    Makan Enak, <br class="d-none d-md-inline">
+                    <span id="home-slogan-2">Aktivitas Makin Lancar</span>
+                </h1>
 
-            <p id="home-slogan-description">
-                Mealmate hadir untuk menemani hari-harimu dengan menu katering rumahan yang sehat, lezat, dan selalu fresh. Cocok untuk mahasiswa dan pekerja Indonesia.
-            </p>
+                <p id="home-slogan-description">
+                    Mealmate hadir untuk menemani hari-harimu dengan menu katering rumahan yang sehat, lezat, dan selalu fresh. Cocok untuk mahasiswa dan pekerja Indonesia.
+                </p>
 
-            <button class="home-cto-btn btn d-inline-flex align-items-center justify-content-center gap-2">
-                <i class="bi bi-fork-knife"></i>
-                <span>Lihat Menu Hari Ini</span>
-                <i class="bi bi-arrow-right"></i>
-            </button>
+                <button class="home-cto-btn btn d-inline-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-fork-knife"></i>
+                    <span>Lihat Menu Hari Ini</span>
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
         </div>
     </section>
 
-    <section id="home-information" class="py-5">
+    <section id="home-information" class="py-4 py-md-5">
         <div class="container">
-            <div class="row feature-wrapper">
+            <div class="row gy-4 gx-sm-4 feature-wrapper">
                 <?php foreach ($features as $feature): ?>
                     <div class="col-12 col-sm-6 col-lg-3 info-card-col">
                         <div class="info-card">
@@ -41,40 +43,42 @@
         </div>
     </section>
 
-    <section id="home-order-steps" class="py-5">
+    <section id="home-order-steps" class="py-4 py-md-5">
         <div class="container">
-            <div class="row">
-                <div class="steps-title-col col-12 col-lg">
-                    <div class="steps-title">
-                        <h4>Cara Mudah Pesan di MealMate</h4>
-                        <p>Hanya dalam beberapa langkah, makan enak sudah siap di depan mata</p>
-                    </div>
-                </div>
-                <?php foreach ($steps as $step): ?>
-                    <div class="col-12 col-sm-6 col-lg info-card-col">
-                        <div class="info-card">
-                            <div class="steps-no-logo d-flex align-items-center">
-                                <div class="steps-seq"><?= htmlspecialchars($step['no']) ?></div>
-                                <div class="icon-logo">
-                                    <img src="<?= htmlspecialchars($step['icon']) ?>" alt="<?= htmlspecialchars($step['title']) ?>" loading="lazy">
-                                </div>
-                            </div>
-
-                            <div class="info-description mt-3">
-                                <h4><?= htmlspecialchars($step['title']) ?></h4>
-                                <p><?= htmlspecialchars($step['desc']) ?></p>
-                            </div>  
+            <div class="steps-wrapper">
+                <div class="row gy-4 align-items-stretch">
+                    <div class="steps-title-col col-12 col-xl">
+                        <div class="steps-title">
+                            <h4>Cara Mudah Pesan di MealMate</h4>
+                            <p>Hanya dalam beberapa langkah, makan enak sudah siap di depan mata</p>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                    <?php foreach ($steps as $step): ?>
+                        <div class="col-12 col-sm-6 col-lg-3 col-xl info-card-col">
+                            <div class="info-card">
+                                <div class="steps-no-logo d-flex align-items-center">
+                                    <div class="steps-seq"><?= htmlspecialchars($step['no']) ?></div>
+                                    <div class="icon-logo">
+                                        <img src="<?= htmlspecialchars($step['icon']) ?>" alt="<?= htmlspecialchars($step['title']) ?>" loading="lazy">
+                                    </div>
+                                </div>
+
+                                <div class="info-description mt-3">
+                                    <h4><?= htmlspecialchars($step['title']) ?></h4>
+                                    <p><?= htmlspecialchars($step['desc']) ?></p>
+                                </div>  
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="home-banner-cta" class="py-5">
+    <section id="home-banner-cta" class="py-4 py-md-5">
         <div class="container">
             <div class="home-banner-container px-4 px-md-5 py-4 py-md-5">
-                <div class="d-flex flex-column flex-md-row align-items-md-center gap-4">
+                <div class="banner-content d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-4">
                     <div class="banner-slogan">
                         <h3>Makan Sehat, <br> Hidup Lebih Semangat</h3>
                     </div>
@@ -89,11 +93,11 @@
         </div>
     </section>
 
-    <section id="home-favorite-package" class="py-5">
+    <section id="home-favorite-package" class="py-4 py-md-5">
         <div class="container">
-            <div class="home-package-title-wrapper d-flex flex-column align-items-center">
+            <div class="home-package-title-wrapper d-flex flex-column align-items-center text-center">
                 <p>PAKET POPULER</p>
-                <div class="package-title d-flex align-items-center">
+                <div class="package-title d-flex align-items-center justify-content-center">
                     <img src="./assets/svg/leaf.svg" alt="leaf" loading="lazy">
                     <h4>Pilihan Favorit Kami</h4>
                     <img src="./assets/svg/leaf.svg" alt="leaf" loading="lazy">
@@ -101,7 +105,7 @@
                 <p>Paket terbaik yang paling banyak dipesan oleh pelanggan kami</p>
             </div>
 
-            <div class="row mt-4 g-4">
+            <div class="row mt-3 mt-md-4 g-3 g-md-4 package-list-row mx-auto">
                 <?php foreach ($packages as $package): ?>
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="package-card">
@@ -133,19 +137,19 @@
         </div>
     </section>
 
-    <section id="home-reviews" class="py-5">
+    <section id="home-reviews" class="py-4 py-md-5">
         <div class="container">
-            <div class="home-reviews-wrapper d-flex flex-column align-items-center">
-                <div class="package-title d-flex align-items-center">
+            <div class="home-reviews-wrapper d-flex flex-column align-items-center text-center">
+                <div class="package-title d-flex align-items-center justify-content-center">
                     <img src="./assets/svg/leaf.svg" alt="leaf" loading="lazy">
                     <h4>Apa Kata Mereka?</h4>
                     <img src="./assets/svg/leaf.svg" alt="leaf" loading="lazy">
                 </div>
                 <p>Kepuasan Pelanggan adalah Prioritas kami</p>
 
-                <div class="row g-4 mt-4 justify-content-center">
+                <div class="row g-3 g-md-4 mt-3 mt-md-4 justify-content-center w-100 text-start">
                     <?php foreach ($reviews as $review): ?>
-                        <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="col-12 col-sm-6 col-xl-3">
                             <div class="review-wrapper">
                                 <div class="review d-flex gap-3">
                                     <img src="./assets/svg/quote.svg" alt="quote">
