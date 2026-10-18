@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg container pt-4">
     <!-- logo -->
     <div class="logo d-flex gap-2 align-items-center">
-        <img src="./assets/img/logo.png" alt="logo" width="56px" height="56px">
+        <img src="./assets/img/logo.png" alt="logo" width="56px" height="56px" loading="lazy">
         <h2>Mealmate</h2>
     </div>
 
@@ -17,7 +17,7 @@
         <!-- header offcanvas (hanya tampil di mobile and tab) -->
         <div class="offcanvas-header">
             <div class="logo d-flex gap-2 align-items-center" id="navMenuLabel">
-                <img src="./assets/img/logo.png" alt="logo" width="40px" height="40px">
+                <img src="./assets/img/logo.png" alt="logo" width="40px" height="40px" loading="lazy">
                 <h2 class="mb-0 fs-4">Mealmate</h2>
             </div>
             <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" data-bs-target="#navMenu" aria-label="Close"></button>

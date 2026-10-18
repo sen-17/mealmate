@@ -3,7 +3,7 @@
         <div class="footer-container d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start gap-4 gap-md-0">
 
             <div class="logo-slogan-container text-center">
-                <img src="./assets/img/logo.png" alt="mealmate-logo" class="footer-logo mb-2">
+                <img src="./assets/img/logo.png" alt="mealmate-logo" class="footer-logo mb-2" loading="lazy">
                 <p class="footer-slogan">Makan Enak, Hidup Lebih Mudah</p>
             </div>
 
