@@ -1,6 +1,16 @@
+.navbar {
+    background-color: #FBF8F2;
+}
+
+.logo img {
+    width: 56px;
+    height: auto;
+    margin-bottom: 8px;
+}
+
 .logo h2 {
     font-family: 'Kaushan Script', cursive;
-    align-self: self-end;
+    font-size: 24px;
 }
 
 .active {
@@ -78,7 +88,7 @@
     border-right-width: 2px;
 }
 
-/* ===== HOVER biar aktif cuman di pc aja ===== */
+/* HOVER biar aktif cuman di pc aja */
 @media (hover: hover) and (pointer: fine) {
     .active:hover {
         color: #1F4B3A;
@@ -114,7 +124,7 @@
     }
 }
 
-/* ===== Mobile and Tablet (offcanvas) ===== */
+/* Mobile Tablet (offcanvas) */
 @media (max-width: 991.98px) {
     #navMenu {
         --bs-offcanvas-width: 75vw;

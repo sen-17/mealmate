@@ -1,7 +1,9 @@
-<nav class="navbar navbar-expand-lg container pt-4">
+<?php $page = $_GET['page'] ?? 'home'; ?>
+
+<nav class="navbar navbar-expand-lg container-fluid py-3 px-5 align-items-center">
     <!-- logo -->
     <div class="logo d-flex gap-2 align-items-center">
-        <img src="./assets/img/logo.png" alt="logo" width="56px" height="56px" loading="lazy">
+        <img src="./assets/img/logo.png" alt="logo">
         <h2>Mealmate</h2>
     </div>
 
@@ -12,9 +14,9 @@
         <i class="bi bi-list"></i>
     </button>
 
-    <!-- menu (offcanvas di mobile dan tab, navbar biasa di desktop) -->
+    <!-- menu -->
     <div class="offcanvas offcanvas-end offcanvas-lg" tabindex="-1" id="navMenu" aria-labelledby="navMenuLabel">
-        <!-- header offcanvas (hanya tampil di mobile and tab) -->
+        <!-- header offcanvas (cuman tampil di mobile dan tablet) -->
         <div class="offcanvas-header">
             <div class="logo d-flex gap-2 align-items-center" id="navMenuLabel">
                 <img src="./assets/img/logo.png" alt="logo" width="40px" height="40px" loading="lazy">
@@ -26,13 +28,13 @@
         <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center w-100">
             <ul class="navbar-nav mx-lg-auto gap-3 gap-lg-5 nav-link">
                 <li class="nav-item">
-                    <a href="" class="text-decoration-none fw-semibold <?= ($page == 'home') ? 'active' : 'non-active'; ?>">Beranda</a>
+                    <a href="index.php?page=home" class="text-decoration-none fw-semibold <?= ($page == 'home') ? 'active' : 'non-active'; ?>">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="text-decoration-none fw-semibold <?= ($page == 'menu') ? 'active' : 'non-active'; ?>">Menu</a>
+                    <a href="index.php?page=menu" class="text-decoration-none fw-semibold <?= ($page == 'menu') ? 'active' : 'non-active'; ?>">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="text-decoration-none fw-semibold <?= ($page == 'about') ? 'active' : 'non-active'; ?>">About</a>
+                    <a href="index.php?page=about" class="text-decoration-none fw-semibold <?= ($page == 'about') ? 'active' : 'non-active'; ?>">About</a>
                 </li>
                 <li class="nav-item">
                     <a href="" class="text-decoration-none fw-semibold <?= ($page == 'faq') ? 'active' : 'non-active'; ?>">FAQ</a>

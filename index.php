@@ -7,7 +7,11 @@ switch ($page) {
     case 'home':
         require_once './controllers/home.php';
         break;
-
+    
+    case 'menu':
+        require_once './controllers/menu.php';
+        break;
+    
     // Contoh rute berikutnya:
     // case 'menu':
     //     require_once './controllers/menu.php';
