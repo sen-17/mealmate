@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS daily_menus (
     menu_id INT NOT NULL,
     date DATE NOT NULL,
     slot ENUM('Pagi', 'Siang', 'Malam') NOT NULL,
+    UNIQUE KEY uniq_date_slot (date, slot),
     FOREIGN KEY (menu_id) REFERENCES menus(menu_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

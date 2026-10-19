@@ -32,6 +32,31 @@
             die("Gagal: File schema.sql tidak ditemukan di " . $sqlFilePath . "\n");
         }
 
+         // hapus data demo dijalanin dengan flag --reset
+        if (in_array('--reset', $argv ?? [], true)) {
+            $pdo->exec(
+                "DELETE FROM daily_menus
+                 WHERE `date` BETWEEN '2026-10-19' AND '2026-11-01'
+                   AND menu_id BETWEEN 1 AND 21;
+                 DELETE FROM menus WHERE menu_id BETWEEN 1 AND 21;"
+            );
+            echo "Data demo dihapus \n";
+        }
+
+        // data demo dijalankan dengan flag --demo
+        if (in_array('--demo', $argv ?? [], true)) {
+            $seedFilePath = __DIR__ . '/seed.sql';
+
+            if (file_exists($seedFilePath)) {
+                $pdo->exec(file_get_contents($seedFilePath));
+                echo "Data demo berhasil dimasukkan dari seed.sql \n";
+            } else {
+                die("Gagal: File seed.sql tidak ditemukan di " . $seedFilePath . "\n");
+            }
+        } else {
+            echo "Data demo dilewati (jalankan dengan --demo untuk mengisi data demo) \n";
+        }
+
         echo "Setup database selesai \n";
 
     } catch (PDOException $e) {
