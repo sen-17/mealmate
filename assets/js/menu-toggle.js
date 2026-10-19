@@ -100,7 +100,7 @@ function renderCards(menus) {
     container.innerHTML = '';
 
     if (!menus || menus.length === 0) {
-        container.innerHTML = '<div class="col-12 text-center py-5"><p class="text-muted">Tidak ada menu tersedia.</p></div>';
+        container.innerHTML = '<div class="col-12 text-center py-5"><p class="text-muted">Menu belum tersedia.</p></div>';
         return;
     }
 
@@ -118,8 +118,8 @@ function renderCards(menus) {
         }
 
         // rating dari controller
-        const rating = item.rating || 5;       // Nilai default 5 jika kosong
-        const reviews = item.reviews || 0;     // Jumlah ulasan default 0
+        const rating = Number(item.rating) || 0;     // menu tanpa ulasan = 0 bintang
+        const reviews = Number(item.reviews) || 0;   // jumlah ulasan default 0
         let starsHtml = '';
 
         for (let i = 1; i <= 5; i++) {
@@ -140,7 +140,7 @@ function renderCards(menus) {
             <div class="card-container col-md-4 d-flex justify-content-center align-items-center">
                 <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden" style="max-width: 400px;">
                     <div class="position-relative">
-                        <img src="/assets/img/${item.gambar}" class="card-img-top" alt="${item.nama}" loading="lazy" style="width: 100%; height: 220px; object-fit: cover;">
+                        <img src="./assets/img/${item.image}" class="card-img-top" alt="${item.menu_name}" loading="lazy" style="width: 100%; height: 220px; object-fit: cover;">
 
                         <span class="badge-slot ${badgeClass}">
                             <i class="bi ${iconClass}"></i>
@@ -149,12 +149,11 @@ function renderCards(menus) {
                     </div>
 
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold text-success mb-2">${item.nama}</h5>
+                        <h5 class="card-title fw-bold text-success mb-2">${item.menu_name}</h5>
                         <p class="card-text text-muted small flex-grow-1">
-                            Ayam goreng renyah dengan nasi putih hangat, lalapan segar, dan sambal khas rumahan.
+                            ${item.description || ''}
                         </p>
                         
-                        <!-- RATING DAN REVIEWS DINAMIS -->
                         <div class="d-flex align-items-center gap-1 mt-2">
                             <div class="text-warning small">
                                 ${starsHtml}
