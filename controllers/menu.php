@@ -5,8 +5,6 @@
     require_once __DIR__ . '/../config/database.php';
     require_once __DIR__ . '/../models/MenuModel.php';
 
-    $menuModel = new MenuModel(getDBConnection());
-
     // mapping ke dalam bahasa indo
     $hariIndo  = ['Sunday' => 'Minggu', 'Monday' => 'Senin', 'Tuesday' => 'Selasa', 'Wednesday' => 'Rabu', 'Thursday' => 'Kamis', 'Friday' => 'Jumat', 'Saturday' => 'Sabtu'];
     $bulanIndo = [1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
@@ -19,7 +17,7 @@
     $tanggalHariIni = "{$hari}, {$tgl} {$bulan} {$tahun}";
 
      // menu hari ini (dari database)
-    $dailyMenus = $menuModel->getMenuByDate(date('Y-m-d'));
+    $dailyMenus = getMenuByDate(date('Y-m-d'));
 
     // logika untuk ngambil tanggal dalam 1 minggu
     $weeklyMenus = [];
@@ -27,7 +25,7 @@
     $endOfWeek   = (clone $startOfWeek)->modify('+6 days');
 
     // ambil jadwal 1 minggu sekaligus (1 query), dikelompokkan per tanggal
-    $menusByDate = $menuModel->getMenuByDateRange(
+    $menusByDate = getMenuByDateRange(
         $startOfWeek->format('Y-m-d'),
         $endOfWeek->format('Y-m-d')
     );
