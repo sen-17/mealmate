@@ -95,7 +95,7 @@
                 <?php if ($totalCustomers <= $perPage): ?>
                     Menampilkan <?= $totalCustomers ?> dari <?= $totalCustomers ?> pelanggan
                 <?php else: ?>
-                    Menampilkan <?= $startRow ?>&ndash;<?= $endRow ?> dari <?= number_format($totalCustomers, 0, ',', '.') ?> pelanggan
+                    Menampilkan <?= $startRow ?>-<?= $endRow ?> dari <?= number_format($totalCustomers, 0, ',', '.') ?> pelanggan
                 <?php endif; ?>
             </span>
 

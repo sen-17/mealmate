@@ -10,6 +10,23 @@ function getAllPackages(): array {
     )->fetchAll();
 }
 
+function getPopularPackages(int $limit = 4): array {
+    $pdo = getDBConnection();
+    $stmt = $pdo->prepare(
+        "SELECT p.package_id, p.package_name, p.description, p.price, p.image, p.duration_days, p.applicable_days,
+                COUNT(o.order_id) AS total_orders
+         FROM packages p
+         LEFT JOIN orders o ON o.package_id = p.package_id
+             AND o.status IN ('Menunggu Verifikasi', 'Aktif', 'Selesai')
+         GROUP BY p.package_id, p.package_name, p.description, p.price, p.image, p.duration_days, p.applicable_days
+         ORDER BY total_orders DESC, p.price ASC, p.package_id ASC
+         LIMIT :limit"
+    );
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
 function getPackageById(int $packageId): ?array {
     $pdo = getDBConnection();
     $stmt = $pdo->prepare(

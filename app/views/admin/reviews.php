@@ -1,13 +1,25 @@
+<?php
+$activeRatingValue = 0;
+$activeRatingLabel = 'Semua Rating';
+foreach ($ratingOptions as $opt) {
+    if (!empty($opt['selected'])) {
+        $activeRatingValue = (int) $opt['value'];
+        $activeRatingLabel = (string) $opt['label'];
+        break;
+    }
+}
+?>
 <div class="mb-4">
     <h1 class="admin-page-title mb-1">Ulasan Pelanggan</h1>
     <p class="text-muted mb-0">Kelola dan pantau semua ulasan dari pelanggan untuk meningkatkan kualitas layanan kami.</p>
 </div>
 
 <div class="admin-card p-3 p-md-4">
-    <form action="index.php" method="get" class="d-flex flex-column flex-md-row align-items-stretch gap-2 mb-4">
+    <form action="index.php" method="get" id="reviewFilterForm" class="d-flex flex-column flex-md-row align-items-stretch gap-2 mb-4">
         <input type="hidden" name="page" value="admin-reviews">
         <input type="hidden" name="sort" value="<?= escape($sort) ?>">
         <input type="hidden" name="dir" value="<?= escape($dir) ?>">
+        <input type="hidden" name="rating" id="reviewRatingInput" value="<?= $activeRatingValue ?>">
 
         <div class="position-relative flex-grow-1">
             <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
@@ -17,13 +29,38 @@
                    aria-label="Cari ulasan">
         </div>
 
-        <div class="admin-review-select position-relative">
-            <i class="bi bi-star position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-            <select name="rating" class="form-select ps-5 rounded-3 admin-search-input" aria-label="Filter rating" onchange="this.form.submit()">
-                <?php foreach ($ratingOptions as $opt): ?>
-                    <option value="<?= (int) $opt['value'] ?>" <?= $opt['selected'] ? 'selected' : '' ?>><?= escape($opt['label']) ?></option>
+        <div class="dropdown admin-filter-dropdown">
+            <button
+                class="btn admin-filter-trigger w-100 d-flex align-items-center justify-content-between gap-2"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                <span class="d-flex align-items-center gap-2 text-truncate">
+                    <i class="bi bi-star text-muted"></i>
+                    <span class="text-truncate"><?= escape($activeRatingLabel) ?></span>
+                </span>
+                <i class="bi bi-chevron-down admin-filter-chevron"></i>
+            </button>
+            <ul class="dropdown-menu admin-filter-menu dropdown-menu-end w-100 shadow-sm border-0">
+                <?php foreach ($ratingOptions as $opt):
+                    $isOptSelected = !empty($opt['selected']);
+                ?>
+                    <li>
+                        <button
+                            type="button"
+                            class="dropdown-item admin-filter-item d-flex align-items-center justify-content-between gap-2 <?= $isOptSelected ? 'active' : '' ?>"
+                            data-report-filter-field="reviewRatingInput"
+                            data-report-filter-value="<?= (int) $opt['value'] ?>"
+                        >
+                            <span><?= escape($opt['label']) ?></span>
+                            <?php if ($isOptSelected): ?>
+                                <i class="bi bi-check2"></i>
+                            <?php endif; ?>
+                        </button>
+                    </li>
                 <?php endforeach; ?>
-            </select>
+            </ul>
         </div>
 
         <div class="admin-review-select d-md-none">

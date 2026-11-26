@@ -139,7 +139,7 @@ $endRow = min($offset + $perPage, $totalMenus);
             <?php if ($totalMenus <= $perPage): ?>
                 Menampilkan <?= $totalMenus ?> dari <?= $totalMenus ?> menu
             <?php else: ?>
-                Menampilkan <?= $startRow ?>–<?= $endRow ?> dari <?= $totalMenus ?> menu
+                Menampilkan <?= $startRow ?>-<?= $endRow ?> dari <?= $totalMenus ?> menu
             <?php endif; ?>
         </span>
 

@@ -63,13 +63,54 @@ function openBulkDeleteModal() {
     new bootstrap.Modal(document.getElementById('bulkDeleteMenuModal')).show();
 }
 
+function setModalDropdownValue(targetInputId, labelSpanId, val, placeholderText) {
+    var hiddenInput = document.getElementById(targetInputId);
+    var labelSpan = document.getElementById(labelSpanId);
+    var strVal = (val !== undefined && val !== null) ? String(val) : '';
+    if (hiddenInput) {
+        hiddenInput.value = strVal;
+    }
+
+    var matchedLabel = '';
+    document.querySelectorAll('.admin-modal-dropdown-item[data-modal-dropdown-target="' + targetInputId + '"]').forEach(function (btn) {
+        var isMatch = (strVal !== '' && btn.getAttribute('data-value') === strVal);
+        btn.classList.toggle('active', isMatch);
+        var checkIcon = btn.querySelector('.admin-modal-check');
+        if (checkIcon) {
+            checkIcon.classList.toggle('d-none', !isMatch);
+        }
+        if (isMatch) {
+            matchedLabel = btn.getAttribute('data-label') || '';
+        }
+    });
+
+    if (labelSpan) {
+        if (matchedLabel !== '') {
+            labelSpan.textContent = matchedLabel;
+            labelSpan.classList.remove('text-muted', 'fw-normal');
+        } else {
+            labelSpan.textContent = placeholderText || 'Pilih';
+            labelSpan.classList.add('text-muted', 'fw-normal');
+        }
+    }
+}
+
 function openScheduleModal(date = '', slot = 'Pagi', menuId = '', origDate = '', origSlot = '') {
     var modalEl = document.getElementById('scheduleFormModal');
     clearModalValidationState(modalEl);
     var dateInput = document.getElementById('schedule_date');
     dateInput.value = date || dateInput.dataset.today || '';
-    document.getElementById('schedule_slot').value = slot;
-    document.getElementById('schedule_menu_id').value = menuId;
+    setModalDropdownValue('schedule_slot', 'scheduleSlotLabel', slot || 'Pagi', 'Pilih Slot Waktu');
+    setModalDropdownValue('schedule_menu_id', 'scheduleMenuLabel', menuId || '', 'Pilih Menu');
+    var menuSearch = document.getElementById('scheduleMenuDropdownSearch');
+    if (menuSearch) {
+        menuSearch.value = '';
+        document.querySelectorAll('#scheduleMenuDropdownList .admin-modal-dropdown-item').forEach(function (el) {
+            el.classList.remove('d-none');
+        });
+        var emptyEl = document.getElementById('scheduleMenuDropdownEmpty');
+        if (emptyEl) emptyEl.classList.add('d-none');
+    }
     document.getElementById('scheduleOriginalDate').value = origDate;
     document.getElementById('scheduleOriginalSlot').value = origSlot;
     document.getElementById('scheduleModalTitle').textContent = origDate ? 'Ubah Jadwal Menu' : 'Tambah Jadwal Menu';
@@ -94,7 +135,6 @@ function openPackageModal(mode, id = 0, name = '', duration = '', applicable = '
     var formId = document.getElementById('packageFormId');
     var nameInput = document.getElementById('package_name');
     var durationInput = document.getElementById('duration_days');
-    var applicableInput = document.getElementById('applicable_days');
     var priceInput = document.getElementById('price');
     var descInput = document.getElementById('description');
     var imgInput = document.getElementById('image');
@@ -104,7 +144,7 @@ function openPackageModal(mode, id = 0, name = '', duration = '', applicable = '
     if (formId) formId.value = id;
     if (nameInput) nameInput.value = name;
     if (durationInput) durationInput.value = duration;
-    if (applicableInput) applicableInput.value = applicable;
+    setModalDropdownValue('applicable_days', 'applicableDaysLabel', applicable || '', 'Pilih Hari');
     if (priceInput) priceInput.value = price;
     if (descInput) descInput.value = desc;
     if (imgInput) imgInput.value = '';
@@ -242,6 +282,98 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    document.querySelectorAll('[data-report-filter-field]').forEach(function (btnEl) {
+        btnEl.addEventListener('click', function () {
+            var fieldId = btnEl.getAttribute('data-report-filter-field');
+            var val = btnEl.getAttribute('data-report-filter-value');
+            var hiddenInput = fieldId ? document.getElementById(fieldId) : null;
+            if (hiddenInput && hiddenInput.form) {
+                hiddenInput.value = val;
+                hiddenInput.form.submit();
+            }
+        });
+    });
+
+    document.querySelectorAll('.admin-modal-dropdown-item').forEach(function (btnEl) {
+        btnEl.addEventListener('click', function () {
+            var targetId = btnEl.getAttribute('data-modal-dropdown-target');
+            var labelId = btnEl.getAttribute('data-modal-dropdown-label');
+            var val = btnEl.getAttribute('data-value');
+            if (targetId && labelId) {
+                setModalDropdownValue(targetId, labelId, val, 'Pilih');
+                var dropdownWrap = btnEl.closest('.dropdown');
+                if (dropdownWrap) {
+                    var trigger = dropdownWrap.querySelector('.admin-modal-dropdown-trigger');
+                    if (trigger) {
+                        trigger.classList.remove('is-invalid');
+                    }
+                }
+            }
+        });
+    });
+
+    var scheduleMenuSearch = document.getElementById('scheduleMenuDropdownSearch');
+    var scheduleMenuList = document.getElementById('scheduleMenuDropdownList');
+    var scheduleMenuEmpty = document.getElementById('scheduleMenuDropdownEmpty');
+    if (scheduleMenuSearch && scheduleMenuList) {
+        var scheduleMenuItems = scheduleMenuList.querySelectorAll('.admin-modal-dropdown-item');
+        scheduleMenuSearch.addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+        scheduleMenuSearch.addEventListener('input', function () {
+            var kw = scheduleMenuSearch.value.trim().toLowerCase();
+            var visibleCount = 0;
+            scheduleMenuItems.forEach(function (itemEl) {
+                var hay = (itemEl.getAttribute('data-menu-search') || '').toLowerCase();
+                var matched = (kw === '' || hay.indexOf(kw) !== -1);
+                itemEl.classList.toggle('d-none', !matched);
+                if (matched) {
+                    visibleCount++;
+                }
+            });
+            if (scheduleMenuEmpty) {
+                scheduleMenuEmpty.classList.toggle('d-none', visibleCount > 0);
+            }
+        });
+    }
+
+    var pkgWizardSearch = document.getElementById('reportPkgWizardSearch');
+    var pkgWizardList = document.getElementById('reportPkgWizardList');
+    var pkgWizardEmpty = document.getElementById('reportPkgWizardEmpty');
+    var pkgWizardModal = document.getElementById('reportPackageWizardModal');
+
+    if (pkgWizardSearch && pkgWizardList) {
+        var wizardItems = pkgWizardList.querySelectorAll('.admin-pkg-wizard-item');
+        pkgWizardSearch.addEventListener('input', function () {
+            var kw = pkgWizardSearch.value.trim().toLowerCase();
+            var visibleCount = 0;
+            wizardItems.forEach(function (itemEl) {
+                var hay = (itemEl.getAttribute('data-pkg-search') || '').toLowerCase();
+                var matched = (kw === '' || hay.indexOf(kw) !== -1);
+                itemEl.classList.toggle('d-none', !matched);
+                if (matched) {
+                    visibleCount++;
+                }
+            });
+            if (pkgWizardEmpty) {
+                pkgWizardEmpty.classList.toggle('d-none', visibleCount > 0);
+            }
+        });
+
+        if (pkgWizardModal) {
+            pkgWizardModal.addEventListener('shown.bs.modal', function () {
+                pkgWizardSearch.focus();
+            });
+            pkgWizardModal.addEventListener('hidden.bs.modal', function () {
+                pkgWizardSearch.value = '';
+                wizardItems.forEach(function (itemEl) { itemEl.classList.remove('d-none'); });
+                if (pkgWizardEmpty) {
+                    pkgWizardEmpty.classList.add('d-none');
+                }
+            });
+        }
+    }
 
     var input = document.getElementById('adminGlobalSearchInput');
     var dropdown = document.getElementById('adminGlobalSearchDropdown');

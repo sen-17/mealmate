@@ -163,7 +163,7 @@ if ($pointCount > 0) {
                     <p class="admin-section-subtext mb-0">Total tagihan pesanan per minggu (<?= htmlspecialchars($unitLabel) ?>)</p>
                 </div>
                 <span class="badge rounded-pill bg-light text-dark border px-3 py-2 fw-medium">
-                    <?= htmlspecialchars(formatDateIndo($startDate, true)) ?> – <?= htmlspecialchars(formatDateIndo($endDate, true)) ?>
+                    <?= htmlspecialchars(formatDateIndo($startDate, true)) ?> - <?= htmlspecialchars(formatDateIndo($endDate, true)) ?>
                 </span>
             </div>
 
@@ -300,7 +300,7 @@ if ($pointCount > 0) {
                             <td class="admin-ord-date-cell" data-label="Mulai"><?= htmlspecialchars(formatDateIndo($ord['start_date'], true)) ?></td>
                             <td class="admin-ord-price-cell fw-semibold" data-label="Total"><?= formatRupiah((int) $ord['total_price']) ?></td>
                             <td class="admin-ord-status-cell">
-                                <span class="admin-order-status-badge status-pending">
+                                <span class="admin-status-pill admin-status-pending">
                                     <span class="status-dot"></span>Menunggu Verifikasi
                                 </span>
                             </td>

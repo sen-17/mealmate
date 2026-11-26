@@ -191,12 +191,12 @@
     background-color: var(--dot-color, currentColor);
 }
 
-.order-status-unpaid { background-color: #FFEDD5; color: #9A3412; --dot-color: #F97316;}
-.order-status-pending { background-color: #FDEFC8; color: #B36B00; --dot-color: #F0A020; }
-.order-status-active { background-color: #D6EDDD; color: #1E6B45; --dot-color: #10B981;}
-.order-status-completed { background-color: #CCFBF1; color: #115E59; --dot-color: #14B8A6;}
-.order-status-rejected { background-color: #FEE2E2; color: #B91C1C; --dot-color: #DC2626;}
-.order-status-cancelled { background-color: #F3F4F6; color: #4B5563; --dot-color: #6B7280;}
+.order-status-unpaid { background-color: #F6ECE3; color: #A65E2E; --dot-color: #A65E2E; }
+.order-status-pending { background-color: #FBF1DF; color: #B47218; --dot-color: #B47218; }
+.order-status-active { background-color: #E2F2E8; color: #1A6B46; --dot-color: #1A6B46; }
+.order-status-completed { background-color: #DFF0EC; color: #13523C; --dot-color: #13523C; }
+.order-status-rejected { background-color: #FBE6E6; color: #C53030; --dot-color: #C53030; }
+.order-status-cancelled { background-color: #FBE6E6; color: #C53030; --dot-color: #C53030; }
 
 /* action */
 .order-detail-link {

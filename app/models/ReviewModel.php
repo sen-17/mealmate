@@ -30,7 +30,50 @@ function getReviewableMenus(array $order): array {
         'end_date' => $order['end_date'],
     ]);
 
-    return $stmt->fetchAll();
+    $rows = $stmt->fetchAll();
+    if (!empty($rows)) {
+        return $rows;
+    }
+
+    $limit = max(1, min(7, (int) ($order['duration_days'] ?? 5)));
+    $fallbackStmt = $pdo->prepare(
+        "SELECT m.menu_id, m.menu_name, m.description, m.image,
+                MIN(dm.`date`) AS first_date,
+                r.review_id, r.rating, r.comment
+         FROM daily_menus dm
+         JOIN menus m ON m.menu_id = dm.menu_id
+         LEFT JOIN reviews r ON r.order_id = :order_id AND r.menu_id = m.menu_id
+         WHERE dm.slot = :slot
+         GROUP BY m.menu_id, m.menu_name, m.description, m.image,
+                  r.review_id, r.rating, r.comment
+         ORDER BY first_date DESC, m.menu_id ASC
+         LIMIT {$limit}"
+    );
+    $fallbackStmt->execute([
+        'order_id' => (int) $order['order_id'],
+        'slot' => $order['slot'],
+    ]);
+
+    $fallbackRows = $fallbackStmt->fetchAll();
+    if (!empty($fallbackRows)) {
+        return $fallbackRows;
+    }
+
+    $catalogStmt = $pdo->prepare(
+        "SELECT m.menu_id, m.menu_name, m.description, m.image,
+                :start_date AS first_date,
+                r.review_id, r.rating, r.comment
+         FROM menus m
+         LEFT JOIN reviews r ON r.order_id = :order_id AND r.menu_id = m.menu_id
+         ORDER BY m.menu_id ASC
+         LIMIT {$limit}"
+    );
+    $catalogStmt->execute([
+        'order_id' => (int) $order['order_id'],
+        'start_date' => $order['start_date'],
+    ]);
+
+    return $catalogStmt->fetchAll();
 }
 
 function hasPendingReviews(array $order): bool {

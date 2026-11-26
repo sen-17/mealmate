@@ -40,7 +40,7 @@ if ($order['status'] === 'Selesai') {
     $reviewMenus = getReviewableMenus($order);
     $reviewedCount = count(array_filter($reviewMenus, static fn (array $m): bool => $m['review_id'] !== null));
     $hasReviews = $reviewedCount > 0;
-    $isReviewed = $reviewedCount === count($reviewMenus);
+    $isReviewed = !empty($reviewMenus) && ($reviewedCount === count($reviewMenus));
 }
 
 render('customer/order_detail', [
