@@ -52,9 +52,9 @@
 </footer>
 <?php endif; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/menu-toggle.js"></script>
-        <script src="./assets/js/flash-toast.js"></script>
+    <script src="./assets/js/flash-toast.js"></script>
     <?php $currentPage = $_GET['page'] ?? ''; ?>
     <?php if ($currentPage === 'checkout'): ?>
         <script src="./assets/js/checkout.js"></script>
@@ -65,6 +65,5 @@
     <?php elseif ($currentPage === 'review'): ?>
         <script src="./assets/js/review.js"></script>
     <?php endif; ?>
-</body>
 </body>
 </html>
