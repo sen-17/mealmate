@@ -126,7 +126,7 @@ $startRow = $totalReviews > 0 ? $offset + 1 : 0;
 $endRow = min($offset + $perPage, $totalReviews);
 $countText = $totalReviews <= $perPage
     ? "Menampilkan {$totalReviews} dari {$totalReviews} ulasan"
-    : "Menampilkan {$startRow}–{$endRow} dari {$totalReviews} ulasan";
+    : "Menampilkan {$startRow}-{$endRow} dari {$totalReviews} ulasan";
 
 render('admin/reviews', [
     'title' => 'Ulasan Pelanggan - MealMate',

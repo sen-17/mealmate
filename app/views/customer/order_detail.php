@@ -5,11 +5,11 @@ $status = $order['status'];
 $isUnpaid = ($status === 'Belum Dibayar' && empty($order['payment_id']));
 
 $slotTimeMap = [
-    'Pagi' => '06.00 – 09.00 WIB',
-    'Siang' => '11.00 – 13.00 WIB',
-    'Malam' => '17.00 – 20.00 WIB',
+    'Pagi' => '06.00 - 09.00 WIB',
+    'Siang' => '11.00 - 13.00 WIB',
+    'Malam' => '17.00 - 20.00 WIB',
 ];
-$slotTimeText = $slotTimeMap[$order['slot']] ?? '08.00 – 10.00 WIB';
+$slotTimeText = $slotTimeMap[$order['slot']] ?? '08.00 - 10.00 WIB';
 
 $statusBannerMap = [
     'Belum Dibayar' => [
@@ -187,8 +187,10 @@ $backUrl = file_exists(__DIR__ . '/../../controllers/orders.php') ? 'index.php?p
                         <a href="index.php?page=checkout&package_id=<?= (int) $order['package_id'] ?>" class="btn checkout-submit-btn w-100 d-flex align-items-center justify-content-center gap-2">
                             <i class="bi bi-arrow-repeat"></i>
                             <span>Pesan Ulang Paket Ini</span>
+                        </a>
+                    </div>
                 <?php elseif ($status === 'Selesai' && $hasReviews): ?>
-                    <div class="mt-4">
+                    <div class="mt-3">
                         <a href="index.php?page=review&order_id=<?= (int) $order['order_id'] ?>" class="btn checkout-submit-btn w-100 d-flex align-items-center justify-content-center gap-2">
                             <i class="bi bi-chat-square-heart"></i>
                             <span>Lihat Ulasan Saya</span>

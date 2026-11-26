@@ -183,15 +183,43 @@ $endRow = min($offset + $perPage, $totalPackages);
                         </div>
 
                         <div class="col-sm-6">
-                            <label for="applicable_days" class="form-label fw-medium small">Hari Berlaku <span class="text-danger">*</span></label>
-                            <select name="applicable_days" id="applicable_days"
-                                    class="form-select <?= !empty($errors['applicable_days']) ? 'is-invalid' : '' ?>" required>
-                                <option value="" disabled <?= empty($old['applicable_days']) ? 'selected' : '' ?>>Pilih Hari</option>
-                                <option value="Senin-Jumat" <?= (($old['applicable_days'] ?? '') === 'Senin-Jumat') ? 'selected' : '' ?>>Senin - Jumat</option>
-                                <option value="Senin-Minggu" <?= (($old['applicable_days'] ?? '') === 'Senin-Minggu') ? 'selected' : '' ?>>Senin - Minggu</option>
-                            </select>
+                            <label for="applicableDaysTrigger" class="form-label fw-medium small">Hari Berlaku <span class="text-danger">*</span></label>
+                            <?php
+                            $oldApplicable = (string) ($old['applicable_days'] ?? '');
+                            $applicableOptions = [
+                                'Senin-Jumat' => 'Senin - Jumat',
+                                'Senin-Minggu' => 'Senin - Minggu',
+                            ];
+                            $currentApplicableLabel = $applicableOptions[$oldApplicable] ?? 'Pilih Hari';
+                            ?>
+                            <input type="hidden" name="applicable_days" id="applicable_days" value="<?= htmlspecialchars($oldApplicable) ?>">
+                            <div class="dropdown w-100">
+                                <button type="button"
+                                        id="applicableDaysTrigger"
+                                        data-placeholder="Pilih Hari"
+                                        class="btn admin-filter-trigger admin-modal-dropdown-trigger w-100 d-flex align-items-center justify-content-between gap-2 <?= !empty($errors['applicable_days']) ? 'is-invalid' : '' ?>"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                    <span id="applicableDaysLabel" class="text-truncate <?= $oldApplicable === '' ? 'text-muted fw-normal' : '' ?>"><?= htmlspecialchars($currentApplicableLabel) ?></span>
+                                    <i class="bi bi-chevron-down admin-filter-chevron"></i>
+                                </button>
+                                <div class="dropdown-menu admin-filter-menu w-100">
+                                    <?php foreach ($applicableOptions as $val => $label): ?>
+                                        <?php $isAppActive = ($oldApplicable === $val); ?>
+                                        <button type="button"
+                                                class="dropdown-item admin-filter-item admin-modal-dropdown-item d-flex align-items-center justify-content-between <?= $isAppActive ? 'active' : '' ?>"
+                                                data-modal-dropdown-target="applicable_days"
+                                                data-modal-dropdown-label="applicableDaysLabel"
+                                                data-value="<?= htmlspecialchars($val) ?>"
+                                                data-label="<?= htmlspecialchars($label) ?>">
+                                            <span><?= htmlspecialchars($label) ?></span>
+                                            <i class="bi bi-check2 admin-modal-check <?= $isAppActive ? '' : 'd-none' ?>"></i>
+                                        </button>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
                             <?php if (!empty($errors['applicable_days'])): ?>
-                                <div class="invalid-feedback"><?= htmlspecialchars($errors['applicable_days']) ?></div>
+                                <div class="invalid-feedback d-block"><?= htmlspecialchars($errors['applicable_days']) ?></div>
                             <?php endif; ?>
                         </div>
                     </div>

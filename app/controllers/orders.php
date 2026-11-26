@@ -67,7 +67,7 @@ $startRow = $totalOrders > 0 ? $offset + 1 : 0;
 $endRow = min($offset + $perPage, $totalOrders);
 $countText = $totalOrders <= $perPage
     ? "Menampilkan {$totalOrders} dari {$totalOrders} Pesanan"
-    : "Menampilkan {$startRow}–{$endRow} dari {$totalOrders} Pesanan";
+    : "Menampilkan {$startRow}-{$endRow} dari {$totalOrders} Pesanan";
 
 render('customer/orders', [
     'title' => 'Riwayat Pesanan - MealMate',

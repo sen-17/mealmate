@@ -51,10 +51,10 @@ $steps = [
     ],
 ];
 
-$dbPackages = getAllPackages();
+$dbPackages = getPopularPackages(4);
 if (!empty($dbPackages)) {
     $packages = [];
-    foreach (array_slice($dbPackages, 0, 4) as $pkg) {
+    foreach ($dbPackages as $pkg) {
         $formattedDays = ($pkg['applicable_days'] === 'Senin-Minggu') ? 'Senin - Minggu' : 'Senin - Jumat';
         $img = !empty($pkg['image']) ? './assets/img/' . $pkg['image'] : './assets/img/nasi-lemak.webp';
         $packages[] = [

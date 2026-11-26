@@ -149,6 +149,18 @@
     height: 42px;
 }
 
+.admin-global-search input:focus,
+.admin-search-input:focus,
+.admin-period-select:focus,
+.admin-period-date:focus,
+.admin-filter-trigger:focus,
+.admin-main .form-control:focus,
+.admin-main .form-select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #13523C !important;
+}
+
 .admin-search-dropdown {
     position: absolute;
     top: calc(100% + 6px);
@@ -477,14 +489,10 @@
     color: #13523C;
 }
 
-.admin-status-rejected {
+.admin-status-rejected,
+.admin-status-cancelled {
     background-color: #FBE6E6;
     color: #C53030;
-}
-
-.admin-status-cancelled {
-    background-color: #EFECE6;
-    color: #5C6460;
 }
 
 .admin-status-unpaid {
@@ -529,17 +537,17 @@
     color: #165B3B;
 }
 
-.admin-verify-banner-rejected {
-    background-color: #FDF0F0;
+.admin-verify-banner-rejected,
+.admin-verify-banner-cancelled {
+    background-color: #FBE6E6;
     border: 1px solid #F3CACA;
-    color: #A82828;
+    color: #C53030;
 }
 
-.admin-verify-banner-cancelled,
 .admin-verify-banner-unpaid {
-    background-color: #F6F4ED;
-    border: 1px solid #E5E0D3;
-    color: #555C58;
+    background-color: #F6ECE3;
+    border: 1px solid #EAD5C3;
+    color: #A65E2E;
 }
 
 .admin-proof-viewer {
@@ -1139,35 +1147,130 @@
     color: #939B96;
 }
 
-.report-status-badge {
+.admin-filter-dropdown {
+    min-width: 195px;
+}
+
+@media (max-width: 767.98px) {
+    .admin-filter-dropdown {
+        width: 100%;
+    }
+}
+
+.admin-filter-trigger {
+    height: 42px;
+    background-color: #FFFFFF;
+    border: 1px solid #E6E1D6;
+    border-radius: 0.5rem;
+    padding: 0 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #1E2923;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.admin-filter-trigger:hover,
+.admin-filter-trigger[aria-expanded="true"] {
+    background-color: #FAF9F5;
+    border-color: #13523C;
+    color: #13523C;
+}
+
+.admin-filter-trigger.is-invalid {
+    border-color: #dc3545;
+}
+
+.admin-modal-menu-list {
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.admin-filter-chevron {
+    font-size: 11px;
+    color: #8A8E87;
+    transition: transform 0.2s ease;
+}
+
+.admin-filter-trigger[aria-expanded="true"] .admin-filter-chevron {
+    transform: rotate(180deg);
+}
+
+.admin-filter-menu {
+    border-radius: 14px;
+    padding: 6px;
+    min-width: 220px;
+    border: 1px solid #EAE6DC !important;
+    box-shadow: 0 10px 28px rgba(19, 82, 60, 0.08) !important;
+}
+
+.admin-filter-item {
+    border-radius: 9px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #2B332E;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.admin-filter-item:hover,
+.admin-filter-item:focus {
+    background-color: #F2F7F4;
+    color: #13523C;
+}
+
+.admin-filter-item.active {
+    background-color: #E3EFE6;
+    color: #13523C;
+    font-weight: 600;
+}
+
+.admin-search-more-item {
+    color: #1F5A3F;
+    font-weight: 600;
+}
+
+.admin-pkg-wizard-list {
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+.admin-pkg-wizard-item {
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #EAE6DC;
+    border-radius: 14px;
+    padding: 12px 14px;
+    transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.12s ease;
+}
+
+.admin-pkg-wizard-item:hover {
+    background-color: #F7FAF8;
+    border-color: #1F5A3F;
+}
+
+.admin-pkg-wizard-item.active {
+    background-color: #F1F8F4;
+    border-color: #1F5A3F;
+}
+
+.admin-pkg-wizard-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.admin-pkg-wizard-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background-color: #E3EFE6;
+    color: #13523C;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.74rem;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 999px;
-    white-space: nowrap;
-}
-
-.report-badge-success {
-    background-color: #1F7A4C;
-    color: #FFFFFF;
-}
-
-.report-badge-warning {
-    background-color: #F8ECC9;
-    color: #8C6200;
-}
-
-.report-badge-unpaid {
-    background-color: #EFECE6;
-    color: #5C645F;
-}
-
-.report-badge-danger {
-    background-color: #FADBD8;
-    color: #A93226;
+    font-size: 1.2rem;
+    flex-shrink: 0;
 }
 
 /* ulasan pelanggan */

@@ -163,29 +163,99 @@ $bulanSingkat = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'S
                     </div>
 
                     <div class="mb-3">
-                        <label for="schedule_slot" class="form-label fw-medium small">Slot Waktu <span class="text-danger">*</span></label>
-                        <select name="slot" id="schedule_slot" class="form-select <?= !empty($errors['slot']) ? 'is-invalid' : '' ?>" required>
-                            <?php foreach (['Pagi', 'Siang', 'Malam'] as $s): ?>
-                                <option value="<?= $s ?>" <?= (($old['slot'] ?? 'Pagi') === $s) ? 'selected' : '' ?>><?= $s ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <label for="scheduleSlotTrigger" class="form-label fw-medium small">Slot Waktu <span class="text-danger">*</span></label>
+                        <?php $oldSlot = (string) ($old['slot'] ?? 'Pagi'); ?>
+                        <input type="hidden" name="slot" id="schedule_slot" value="<?= htmlspecialchars($oldSlot) ?>">
+                        <div class="dropdown w-100">
+                            <button type="button"
+                                    id="scheduleSlotTrigger"
+                                    data-placeholder="Pilih Slot Waktu"
+                                    class="btn admin-filter-trigger admin-modal-dropdown-trigger w-100 d-flex align-items-center justify-content-between gap-2 <?= !empty($errors['slot']) ? 'is-invalid' : '' ?>"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                <span id="scheduleSlotLabel" class="text-truncate"><?= htmlspecialchars($oldSlot) ?></span>
+                                <i class="bi bi-chevron-down admin-filter-chevron"></i>
+                            </button>
+                            <div class="dropdown-menu admin-filter-menu w-100">
+                                <?php foreach (['Pagi', 'Siang', 'Malam'] as $s): ?>
+                                    <?php $isSlotActive = ($oldSlot === $s); ?>
+                                    <button type="button"
+                                            class="dropdown-item admin-filter-item admin-modal-dropdown-item d-flex align-items-center justify-content-between <?= $isSlotActive ? 'active' : '' ?>"
+                                            data-modal-dropdown-target="schedule_slot"
+                                            data-modal-dropdown-label="scheduleSlotLabel"
+                                            data-value="<?= htmlspecialchars($s) ?>"
+                                            data-label="<?= htmlspecialchars($s) ?>">
+                                        <span><?= htmlspecialchars($s) ?></span>
+                                        <i class="bi bi-check2 admin-modal-check <?= $isSlotActive ? '' : 'd-none' ?>"></i>
+                                    </button>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
                         <?php if (!empty($errors['slot'])): ?>
-                            <div class="invalid-feedback"><?= htmlspecialchars($errors['slot']) ?></div>
+                            <div class="invalid-feedback d-block"><?= htmlspecialchars($errors['slot']) ?></div>
                         <?php endif; ?>
                     </div>
 
                     <div class="mb-2">
-                        <label for="schedule_menu_id" class="form-label fw-medium small">Menu Disajikan <span class="text-danger">*</span></label>
-                        <select name="menu_id" id="schedule_menu_id" class="form-select <?= !empty($errors['menu_id']) ? 'is-invalid' : '' ?>" required>
-                            <option value="">-- Pilih Menu --</option>
-                            <?php foreach ($allMenus as $m): ?>
-                                <option value="<?= (int) $m['menu_id'] ?>" <?= ((int) ($old['menu_id'] ?? 0) === (int) $m['menu_id']) ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($m['menu_name']) ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                        <label for="scheduleMenuTrigger" class="form-label fw-medium small">Menu Disajikan <span class="text-danger">*</span></label>
+                        <?php
+                        $oldMenuId = (int) ($old['menu_id'] ?? 0);
+                        $currentMenuLabel = 'Pilih Menu';
+                        foreach ($allMenus as $m) {
+                            if ((int) $m['menu_id'] === $oldMenuId) {
+                                $currentMenuLabel = (string) $m['menu_name'];
+                                break;
+                            }
+                        }
+                        ?>
+                        <input type="hidden" name="menu_id" id="schedule_menu_id" value="<?= $oldMenuId > 0 ? $oldMenuId : '' ?>">
+                        <div class="dropdown w-100">
+                            <button type="button"
+                                    id="scheduleMenuTrigger"
+                                    data-placeholder="Pilih Menu"
+                                    class="btn admin-filter-trigger admin-modal-dropdown-trigger w-100 d-flex align-items-center justify-content-between gap-2 <?= !empty($errors['menu_id']) ? 'is-invalid' : '' ?>"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                <span id="scheduleMenuLabel" class="text-truncate <?= $oldMenuId <= 0 ? 'text-muted fw-normal' : '' ?>"><?= htmlspecialchars($currentMenuLabel) ?></span>
+                                <i class="bi bi-chevron-down admin-filter-chevron"></i>
+                            </button>
+                            <div class="dropdown-menu admin-filter-menu w-100">
+                                <div class="px-2 pt-1 pb-2">
+                                    <div class="position-relative">
+                                        <i class="bi bi-search position-absolute top-50 translate-middle-y text-muted" style="left: 11px; font-size: 0.8rem;"></i>
+                                        <input type="search"
+                                               id="scheduleMenuDropdownSearch"
+                                               class="form-control form-control-sm ps-4 rounded-3"
+                                               placeholder="Cari menu makanan..."
+                                               autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="admin-modal-menu-list" id="scheduleMenuDropdownList">
+                                    <?php foreach ($allMenus as $m): ?>
+                                        <?php
+                                        $mId = (int) $m['menu_id'];
+                                        $mName = (string) $m['menu_name'];
+                                        $isMenuActive = ($oldMenuId === $mId);
+                                        ?>
+                                        <button type="button"
+                                                class="dropdown-item admin-filter-item admin-modal-dropdown-item d-flex align-items-center justify-content-between gap-2 <?= $isMenuActive ? 'active' : '' ?>"
+                                                data-modal-dropdown-target="schedule_menu_id"
+                                                data-modal-dropdown-label="scheduleMenuLabel"
+                                                data-value="<?= $mId ?>"
+                                                data-label="<?= htmlspecialchars($mName) ?>"
+                                                data-menu-search="<?= htmlspecialchars(strtolower($mName)) ?>">
+                                            <span class="text-truncate"><?= htmlspecialchars($mName) ?></span>
+                                            <i class="bi bi-check2 admin-modal-check flex-shrink-0 <?= $isMenuActive ? '' : 'd-none' ?>"></i>
+                                        </button>
+                                    <?php endforeach; ?>
+                                </div>
+                                <div id="scheduleMenuDropdownEmpty" class="text-center text-muted small py-3 d-none">
+                                    Menu tidak ditemukan.
+                                </div>
+                            </div>
+                        </div>
                         <?php if (!empty($errors['menu_id'])): ?>
-                            <div class="invalid-feedback"><?= htmlspecialchars($errors['menu_id']) ?></div>
+                            <div class="invalid-feedback d-block"><?= htmlspecialchars($errors['menu_id']) ?></div>
                         <?php endif; ?>
                     </div>
                 </div>

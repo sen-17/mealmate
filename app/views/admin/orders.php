@@ -122,7 +122,7 @@ $formatTgl = static function (string $dateStr, bool $withTime = false) use ($bul
                 <?php if ($totalOrders <= $perPage): ?>
                     Menampilkan <?= $totalOrders ?> dari <?= $totalOrders ?> pesanan
                 <?php else: ?>
-                    Menampilkan <?= $startRow ?>–<?= $endRow ?> dari <?= $totalOrders ?> pesanan
+                    Menampilkan <?= $startRow ?>-<?= $endRow ?> dari <?= $totalOrders ?> pesanan
                 <?php endif; ?>
             </span>
 

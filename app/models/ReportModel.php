@@ -354,6 +354,17 @@ function getReportKpiSummary(
     ];
 }
 
+function getReportTransactionSortMap(): array {
+    return [
+        'order_id' => 'o.order_id',
+        'customer' => 'u.name',
+        'date' => 'o.created_at',
+        'package' => 'p.package_name',
+        'price' => 'o.total_price',
+        'status' => 'o.status',
+    ];
+}
+
 function getReportTransactions(
     string $startDate,
     string $endDate,
@@ -361,10 +372,17 @@ function getReportTransactions(
     int $packageId = 0,
     string $search = '',
     ?int $limit = 10,
-    ?int $offset = 0
+    ?int $offset = 0,
+    string $sort = 'date',
+    string $dir = 'desc'
 ): array {
     $pdo = getDBConnection();
     [$where, $params] = buildReportTransactionFilter($startDate, $endDate, $status, $packageId, $search);
+
+    $sortMap = getReportTransactionSortMap();
+    $sortCol = $sortMap[$sort] ?? 'o.created_at';
+    $sortDir = strtolower($dir) === 'asc' ? 'ASC' : 'DESC';
+    $orderBy = "{$sortCol} {$sortDir}, o.order_id DESC";
 
     $sql = "SELECT o.order_id, o.start_date, o.slot, o.total_price, o.status, o.created_at,
                    u.name AS customer_name, u.email AS customer_email, u.phone_number AS customer_phone,
@@ -379,7 +397,7 @@ function getReportTransactions(
                 ORDER BY p2.payment_id DESC LIMIT 1
             )
             {$where}
-            ORDER BY o.created_at DESC, o.order_id DESC";
+            ORDER BY {$orderBy}";
 
     if ($limit !== null && $offset !== null) {
         $sql .= " LIMIT :limit OFFSET :offset";
